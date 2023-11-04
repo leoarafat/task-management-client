@@ -3,7 +3,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 
-const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
+const TaskItemModal = ({ isOpen, onClose, data, onSave }: any) => {
   const { control, handleSubmit, reset } = useForm();
 
   React.useEffect(() => {
@@ -23,7 +23,7 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
       }`}
     >
       <div className="bg-[#150F2D] p-4 rounded shadow-lg md:w-[450px] ">
-        <h2 className="text-white text-lg font-semibold mb-2">Edit Board</h2>
+        <h2 className="text-white text-lg font-semibold mb-2">Edit Task</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label htmlFor="title" className="text-white mb-2">
@@ -42,7 +42,21 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
               )}
             />
           </div>
-
+          <div className="mb-4">
+            <Controller
+              name="description"
+              control={control}
+              defaultValue={data?.description}
+              rules={{ required: "Task description is required" }}
+              render={({ field }) => (
+                <textarea
+                  {...field}
+                  placeholder="Task Description"
+                  className={`w-full p-2 text-white bg-[#150F2D] border border-white rounded`}
+                />
+              )}
+            />
+          </div>
           <div className="mb-4">
             <label htmlFor="status" className="text-white mb-2">
               Status
@@ -85,4 +99,4 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
   );
 };
 
-export default BoardItemModal;
+export default TaskItemModal;

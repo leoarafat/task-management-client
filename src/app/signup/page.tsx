@@ -1,6 +1,5 @@
-import LoginPage from "@/components/Authentication/LoginPage";
 import SignUpPage from "@/components/Authentication/SignUpPage";
-import Header from "@/components/ui/DashboardHeader";
+import Navbar from "@/components/Navbar/Navbar";
 
 import Heading from "@/utils/Heading";
 import { Metadata } from "next";
@@ -13,11 +12,11 @@ const Login = () => {
   return (
     <>
       <Heading
-        title="HotelHaven || SignUp"
-        description="HotelHaven is booking platform"
+        title="Task Manager || SignUp"
+        description="Task Manager is a Task Management platform"
         keywords="Hotel, Property, Du Plex"
       />
-      <Header />
+      <Navbar />
       <SignUpPage />
     </>
   );

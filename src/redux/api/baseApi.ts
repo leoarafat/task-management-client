@@ -5,7 +5,7 @@ import { axiosBaseQuery } from "@/helpers/axios/axiosBaseQuery";
 
 export const baseApi = createApi({
   reducerPath: "api",
-  baseQuery: axiosBaseQuery({ baseUrl: getBaseUrl() }),
+  baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: () => ({}),
   tagTypes: tagTypesList,
 });

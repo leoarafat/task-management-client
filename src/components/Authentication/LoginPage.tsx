@@ -19,7 +19,7 @@ function LoginPage() {
     if (isSuccess) {
       if (data) {
         message.success("Login Successfully!");
-        storeUserInfo({ accessToken: data?.accessToken });
+        storeUserInfo({ accessToken: data?.data?.accessToken });
         router.push("/profile");
       }
     }

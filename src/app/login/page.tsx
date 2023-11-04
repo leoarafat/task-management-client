@@ -1,11 +1,21 @@
-import React from "react";
+import LoginPage from "@/components/Authentication/LoginPage";
+import Navbar from "@/components/Navbar/Navbar";
 
-const LoginPage = () => {
+import Heading from "@/utils/Heading";
+import { Metadata } from "next";
+
+const Login = () => {
   return (
-    <div>
-      <h1>Login Page</h1>
-    </div>
+    <>
+      <Heading
+        title="Task Manager || Login"
+        description="Task Manager is Task Management Website"
+        keywords="Hotel, Property, Du Plex"
+      />
+      <Navbar />
+      <LoginPage />
+    </>
   );
 };
 
-export default LoginPage;
+export default Login;

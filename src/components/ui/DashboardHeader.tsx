@@ -1,3 +1,4 @@
+"use client";
 import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
@@ -6,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useLoadUserQuery } from "@/redux/slices/user/userApi";
 const { Header: AntHeader } = Layout;
 
-const Header = () => {
+const DashboardHeader = () => {
   const router = useRouter();
 
   const logOut = () => {
@@ -65,4 +66,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default DashboardHeader;

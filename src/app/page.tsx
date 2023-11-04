@@ -1,10 +1,11 @@
-import Sidebar from "@/constants/sidebarItems";
+import Navbar from "@/components/Navbar/Navbar";
+
 import React from "react";
 
 const RootPage = () => {
   return (
     <div>
-      <Sidebar />
+      <Navbar />
     </div>
   );
 };

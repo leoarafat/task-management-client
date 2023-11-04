@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { Layout, Menu } from "antd";
-import Logo from "../../../public/assets/logo.png";
+import Logo from "../../../public/asstes/logo.png";
 import { sidebarItems } from "@/constants/sidebarItems";
-import { USER_ROLE } from "@/constants/role";
 import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 import Image from "next/image";

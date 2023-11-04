@@ -2,14 +2,14 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import defaultUserImage from "../../../public/assets/user.png";
-import LogoImage from "../../../public/assets/logo.png";
+import defaultUserImage from "../../../public/asstes/user.png";
+import LogoImage from "../../../public/asstes/logo.png";
 import Image from "next/image";
 import { getUserInfo } from "@/services/auth.service";
 import { useLoadUserQuery } from "@/redux/slices/user/userApi";
 
 import dynamic from "next/dynamic";
-const Header = () => {
+const Navbar = () => {
   const user = getUserInfo() as any;
 
   const { data, error } = useLoadUserQuery(user?.userId);
@@ -74,25 +74,8 @@ const Header = () => {
                     </span>
                   </li>
                 </Link>
-                <Link href={"/services"}>
-                  {" "}
-                  <Link href={"/services"}>
-                    {" "}
-                    <li className="max-w-max">
-                      <span className="block md:px-3 group">
-                        <div
-                          className="relative text-white
-                                                        before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-cyan-800 dark:before:bg-cyan-400 before:transition before:scale-x-0 group-hover:before:scale-x-100"
-                        >
-                          <span className="transition group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
-                            Services
-                          </span>
-                        </div>
-                      </span>
-                    </li>
-                  </Link>
-                </Link>
-                <Link href={"/about-us"}>
+
+                <Link href={"/dashboard"}>
                   {" "}
                   <li className="max-w-max">
                     <span className="block md:px-3 group">
@@ -101,7 +84,7 @@ const Header = () => {
                                                         before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-cyan-800 dark:before:bg-cyan-400 before:transition before:scale-x-0 group-hover:before:scale-x-100"
                       >
                         <span className="transition group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
-                          About US
+                          Dashboard
                         </span>
                       </div>
                     </span>
@@ -117,21 +100,6 @@ const Header = () => {
                       >
                         <span className="transition group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
                           FAQ
-                        </span>
-                      </div>
-                    </span>
-                  </li>
-                </Link>
-                <Link href={"/blog"}>
-                  {" "}
-                  <li className="max-w-max">
-                    <span className="block md:px-3 group">
-                      <div
-                        className="relative text-white
-                                                        before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-cyan-800 dark:before:bg-cyan-400 before:transition before:scale-x-0 group-hover:before:scale-x-100"
-                      >
-                        <span className="transition group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
-                          Blogs
                         </span>
                       </div>
                     </span>
@@ -244,7 +212,7 @@ const Header = () => {
   );
 };
 
-// export default Header;
-export default dynamic(() => Promise.resolve(Header), {
+// export default Navbar;
+export default dynamic(() => Promise.resolve(Navbar), {
   ssr: false,
 });

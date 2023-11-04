@@ -6,11 +6,20 @@ import {
   ScheduleOutlined,
   ThunderboltOutlined,
   CreditCardOutlined,
-  FileTextOutlined,
+  UsergroupAddOutlined,
+  PlusCircleOutlined,
+  UnorderedListOutlined,
+  ShoppingCartOutlined,
+  SwitcherOutlined,
 } from "@ant-design/icons";
+import QuizIcon from "@mui/icons-material/Quiz";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 export const sidebarItems = (role: string) => {
+  const isRole = role?.toUpperCase();
+  //!
   const defaultSidebarItems: MenuProps["items"] = [
     {
       label: "Profile",
@@ -18,100 +27,68 @@ export const sidebarItems = (role: string) => {
       icon: <ProfileOutlined />,
       children: [
         {
-          label: <Link href={`/${role}`}>Account Profile</Link>,
-          key: `/${role}/profile`,
-        },
-        {
-          label: <Link href={`/${role}/change-password`}>Change Password</Link>,
-          key: `/${role}/change-password`,
+          label: <Link href={`/profile`}>{isRole} Profile</Link>,
+          key: `/profile`,
         },
       ],
-    },
-  ];
-
-  const commonAdminSidebarItems: MenuProps["items"] = [
-    {
-      label: <Link href={`/${role}/manage-student`}>Manage Students</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/manage-student`,
-    },
-    {
-      label: <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/manage-faculty`,
     },
   ];
 
   const adminSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
-    ...commonAdminSidebarItems,
+
     {
-      label: "Manage academic",
-      key: "manage-academic",
-      icon: <TableOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/academic/faculty`}>Faculties</Link>,
-          key: `/${role}/academic/faculty`,
-        },
-        {
-          label: <Link href={`/${role}/academic/department`}>Departments</Link>,
-          key: `/${role}/academic/department`,
-        },
-        {
-          label: <Link href={`/${role}/academic/semester`}>Semesters</Link>,
-          key: `/${role}/academic/semester`,
-        },
-      ],
+      label: <Link href={`/${role}/user-analytics`}>User Analytics</Link>,
+      key: `/${role}/user-analytics`,
+      icon: <TbBrandGoogleAnalytics />,
     },
+    {
+      label: <Link href={`/${role}/service-analytics`}>Service Analytics</Link>,
+      key: `/${role}/service-analytics`,
+      icon: <TbBrandGoogleAnalytics />,
+    },
+    {
+      label: <Link href={`/${role}/booking-analytics`}>Booking Analytics</Link>,
+      key: `/${role}/booking-analytics`,
+      icon: <TbBrandGoogleAnalytics />,
+    },
+
     {
       label: "Management",
       key: "management",
       icon: <AppstoreOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
+          label: <Link href={`/${role}/user`}>User</Link>,
+          key: `/${role}/user`,
+          icon: <UsergroupAddOutlined />,
         },
         {
-          label: <Link href={`/${role}/building`}>Building</Link>,
-          key: `/${role}/building`,
+          label: <Link href={`/${role}/category`}>Category</Link>,
+          key: `/${role}/category`,
+          icon: <PlusCircleOutlined />,
         },
         {
-          label: <Link href={`/${role}/room`}>Rooms</Link>,
-          key: `/${role}/room`,
+          label: <Link href={`/${role}/service`}>Service</Link>,
+          key: `/${role}/service`,
+          icon: <UnorderedListOutlined />,
         },
         {
-          label: <Link href={`/${role}/course`}>Course</Link>,
-          key: `/${role}/course`,
+          label: <Link href={`/${role}/bookings`}>Bookings</Link>,
+          key: `/${role}/bookings`,
+          icon: <ShoppingCartOutlined />,
         },
+
         {
-          label: (
-            <Link href={`/${role}/semester-registration`}>
-              Semester registration
-            </Link>
-          ),
-          key: `/${role}/semester-registration`,
+          label: <Link href={`/${role}/faq`}>Faq</Link>,
+          key: `/${role}/faq`,
+          icon: <QuizIcon />,
         },
+
         {
-          label: <Link href={`/${role}/offered-course`}>Offered courses</Link>,
-          key: `/${role}/offered-course`,
-        },
-        {
-          label: (
-            <Link href={`/${role}/offered-course-section`}>
-              Course sections
-            </Link>
-          ),
-          key: `/${role}/offered-course-section`,
-        },
-        {
-          label: (
-            <Link href={`/${role}/offered-course-schedule`}>
-              Course schedules
-            </Link>
-          ),
-          key: `/${role}/offered-course-schedule`,
+          label: <Link href={`/${role}/blog`}>Blog Post</Link>,
+          key: `/${role}/blog`,
+          icon: <PostAddIcon />,
         },
       ],
     },
@@ -119,72 +96,41 @@ export const sidebarItems = (role: string) => {
 
   const superAdminSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
-    ...commonAdminSidebarItems,
+    // ...adminSidebarItems,
     {
       label: <Link href={`/${role}/admin`}>Manage Admin</Link>,
       icon: <TableOutlined />,
       key: `/${role}/admin`,
     },
-    {
-      label: <Link href={`/${role}/user`}>Manage User</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/user`,
-    },
-    {
-      label: "Management",
-      key: "management",
-      icon: <AppstoreOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
-        },
-      ],
-    },
   ];
 
-  const facultySidebarItems: MenuProps["items"] = [
+  const userSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/courses`}>Courses</Link>,
+      label: <Link href={`/${role}/cart`}>Cart</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/courses`,
-    },
-  ];
-
-  const studentSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
-    {
-      label: <Link href={`/${role}/courses`}>Courses</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/courses`,
+      key: `/${role}/cart`,
     },
     {
-      label: <Link href={`/${role}/courses/schedule`}>Course schedules</Link>,
+      label: <Link href={`/${role}/booking-list`}>Booking List</Link>,
       icon: <ScheduleOutlined />,
-      key: `/${role}/courses/schedule`,
+      key: `/${role}/booking-list`,
     },
     {
-      label: <Link href={`/${role}/registration`}>Registration</Link>,
+      label: <Link href={`/${role}/notification`}>Notification</Link>,
       icon: <ThunderboltOutlined />,
-      key: `/${role}/registration`,
+      key: `/${role}/notification`,
     },
     {
       label: <Link href={`/${role}/payment`}>Payment</Link>,
       icon: <CreditCardOutlined />,
       key: `/${role}/payment`,
     },
-    {
-      label: <Link href={`/${role}/academic-report`}>Academic report</Link>,
-      icon: <FileTextOutlined />,
-      key: `/${role}/academic-report`,
-    },
   ];
 
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;
   else if (role === USER_ROLE.ADMIN) return adminSidebarItems;
-  else if (role === USER_ROLE.FACULTY) return facultySidebarItems;
-  else if (role === USER_ROLE.STUDENT) return studentSidebarItems;
+  else if (role === USER_ROLE.USER) return userSidebarItems;
   else {
     return defaultSidebarItems;
   }

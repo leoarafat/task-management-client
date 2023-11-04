@@ -1,14 +1,9 @@
-// "use client";
-// import { store } from "@/redux/store";
-// import { Provider } from "react-redux";
-// import StyledComponentsRegistry from "./AntdRegistry";
+"use client";
+import { store } from "@/redux/store";
+import { Provider } from "react-redux";
 
-// const Providers = ({ children }: { children: React.ReactNode }) => {
-//   return (
-//     <Provider store={store}>
-//       <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-//     </Provider>
-//   );
-// };
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  return <Provider store={store}>{children}</Provider>;
+};
 
-// export default Providers;
+export default Providers;

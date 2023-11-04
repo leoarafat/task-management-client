@@ -17,7 +17,7 @@ export const sidebarItems = (role: string) => {
       ],
     },
     {
-      label: <Link href={`/board`}>Board List</Link>,
+      label: <Link href={`/board`}>Board</Link>,
       key: "board",
       icon: <ProfileOutlined />,
     },

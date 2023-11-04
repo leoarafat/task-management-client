@@ -6,20 +6,20 @@ import defaultUserImage from "../../../public/asstes/user.png";
 import LogoImage from "../../../public/asstes/logo.png";
 import Image from "next/image";
 import { getUserInfo } from "@/services/auth.service";
-import { useLoadUserQuery } from "@/redux/slices/user/userApi";
 
 import dynamic from "next/dynamic";
+import { useLoadUserQuery } from "@/redux/slices/user/userApi";
 const Navbar = () => {
   const user = getUserInfo() as any;
+  const id = user?.userId;
 
-  const { data, error } = useLoadUserQuery(user?.userId);
-  // console.log(data);
+  const { data, error } = useLoadUserQuery(id);
+  console.log(data);
   return (
     <div
       className=" z-40 w-full border-b  mb-2"
       style={{
-        backgroundImage:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,10,77,1) 85%, rgba(22,33,36,1) 100%)",
+        backgroundColor: "#010313",
       }}
     >
       <div className="container m-auto px-2 md:px-12 lg:px-7">
@@ -39,24 +39,23 @@ const Navbar = () => {
                         bg-gray-200 bg-opacity-75 dark:bg-darker dark:opacity-80"
           ></label>
           <div className="relative z-40">
-            <Link href="/" aria-label="logo">
+            <Link className="flex items-center" href="/" aria-label="logo">
               <Image
-                src={LogoImage}
+                src={
+                  "https://res.cloudinary.com/arafatleo/image/upload/v1699089796/avatars/blank-bird-logo-design-idea-png-15_tjp0jh.png"
+                }
                 className="w-20 sm:w-20 rounded-full "
                 alt="User logo"
                 width="144"
                 height="68"
               />
+              <p className="text-lg text-gray-300 font-semibold font-sans ml-2">
+                <span className="text-[40px]">T</span>-Manager
+              </p>
             </Link>
           </div>
 
-          <div
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,10,77,1) 85%, rgba(22,33,36,1) 100%)",
-            }}
-            className=" fixed h-full w-4/5 max-w-sm top-0 -left-full peer-checked:-left-0 md:relative md:top-0 md:left-0 transition-all z-30 md:flex items-center p-8 md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent md:w-max"
-          >
+          <div className="bg-[#150F2D] fixed h-full w-4/5 max-w-sm top-0 -left-full peer-checked:-left-0 md:relative md:top-0 md:left-0 transition-all z-30 md:flex items-center p-8 md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent md:w-max">
             <div className="z-20 flex gap-8 md:gap-0 flex-col md:flex-row md:items-center w-full">
               <ul className="pt-28 lg:pt-0 gap-8 tracking-wide font-medium flex-col flex md:flex-row md:gap-0 t">
                 <Link href="/">
@@ -112,11 +111,11 @@ const Navbar = () => {
                     {" "}
                     <button
                       type="button"
-                      title="Start buying"
+                      title={data?.data?.name}
                       className="flex justify-center items-center w-full py-3 px-6 text-center rounded-full transition bg-gray-900 dark:bg-gray-700 hover:bg-cyan-500 active:bg-cyan-600 focus:bg-cyan-800"
                     >
                       <span className="block text-white text-sm">
-                        {data?.name}
+                        {data?.data?.name}
                       </span>
                     </button>
                   </Link>

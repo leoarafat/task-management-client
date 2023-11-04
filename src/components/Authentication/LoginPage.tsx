@@ -44,12 +44,12 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center ">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl text-gray-800 font-bold mb-4">Log In</h2>
+      <div className="bg-[#150F2D] p-8 rounded shadow-md w-full max-w-md">
+        <h2 className="text-2xl  font-bold mb-4">Log In</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4 relative">
             <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
+              className="block  text-sm font-semibold mb-2"
               htmlFor="email"
             >
               Email
@@ -76,7 +76,7 @@ function LoginPage() {
           </div>
           <div className="mb-4 relative">
             <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
+              className="block  text-sm font-semibold mb-2"
               htmlFor="password"
             >
               Password

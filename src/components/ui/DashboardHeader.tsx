@@ -5,6 +5,7 @@ import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
 import { useLoadUserQuery } from "@/redux/slices/user/userApi";
+import UserImage from "../../../public/asstes/user.png";
 const { Header: AntHeader } = Layout;
 
 const DashboardHeader = () => {
@@ -29,16 +30,10 @@ const DashboardHeader = () => {
   // console.log(user);
   const { role, userId } = getUserInfo() as any;
   const { data } = useLoadUserQuery(userId);
-  console.log(data);
 
   // const role = "admin";
   return (
-    <AntHeader
-      style={{
-        backgroundImage:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,10,77,1) 85%, rgba(22,33,36,1) 100%)",
-      }}
-    >
+    <AntHeader className="z-40 bg-[#010313] w-full border-b  ">
       <Row
         justify="end"
         align="middle"
@@ -57,7 +52,10 @@ const DashboardHeader = () => {
         <Dropdown menu={{ items }}>
           <a>
             <Space wrap size={16}>
-              <Avatar size="large" src={data?.avatar?.url} />
+              <Avatar
+                size="large"
+                src="https://res.cloudinary.com/arafatleo/image/upload/v1697953927/avatars/ws3kmyodb9yogw5gwu9e.png"
+              />
             </Space>
           </a>
         </Dropdown>

@@ -14,7 +14,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
     >
       <Header />
 
-      <div className="bg-gradient-to-r from-[#141155] to-[#050522] text-white   p-[10px] h-screen">
+      <div className="bg-[#010313] text-white   p-[10px] h-screen">
         {children}
       </div>
     </Content>

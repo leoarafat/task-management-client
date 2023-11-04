@@ -45,14 +45,17 @@ const SideBar = () => {
           justifyContent: "center",
         }}
       >
-        <Link href={"/"}>
+        <Link className="flex flex-col items-center" href={"/"}>
           <Image
-            src={Logo}
+            src="https://res.cloudinary.com/arafatleo/image/upload/v1699089796/avatars/blank-bird-logo-design-idea-png-15_tjp0jh.png"
             width={45}
             height={45}
             className="w-[45px] h-[45px] rounded-full cursor-pointer"
             alt="Hotel Haven"
           />
+          <p className="text-lg text-gray-600 font-semibold font-sans ml-2">
+            <span className="text-[40px]">T</span>-Manager
+          </p>
         </Link>
       </div>
       <Menu

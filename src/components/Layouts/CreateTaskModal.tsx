@@ -1,8 +1,10 @@
 "use client";
+import { boardList } from "@/shared/Data";
+import TextArea from "antd/es/input/TextArea";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 
-const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
+const CreateTaskModal = ({ isOpen, onClose, onSave }: any) => {
   const { control, handleSubmit, formState, reset } = useForm();
   const { errors } = formState;
 
@@ -21,7 +23,7 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
     >
       <div className="bg-[#150F2D] md:w-[450px] p-4 rounded shadow-lg">
         <h2 className="text-white text-lg font-semibold mb-2">
-          Create New Board
+          Create New Task
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -33,7 +35,7 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
                 <input
                   {...field}
                   type="text"
-                  placeholder="Board Title"
+                  placeholder="Task Title"
                   className={`w-full p-2 text-white bg-[#150F2D] border border-white rounded ${
                     errors.title ? "border-red-500" : ""
                   }`}
@@ -45,6 +47,45 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
                 {errors.title.message as React.ReactNode}
               </p>
             )}
+          </div>
+          <div className="mb-4">
+            <Controller
+              name="description"
+              control={control}
+              rules={{ required: "Task description is required" }}
+              render={({ field }) => (
+                <textarea
+                  {...field}
+                  placeholder="Task Description"
+                  className={`w-full p-2 text-white bg-[#150F2D] border border-white rounded ${
+                    errors.description ? "border-red-500" : ""
+                  }`}
+                />
+              )}
+            />
+            {errors.description && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.description.message as React.ReactNode}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <Controller
+              name="status"
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="w-full p-2 text-white bg-[#150F2D] border border-white rounded"
+                >
+                  {boardList?.map((board, index) => (
+                    <option key={index} value={board.status}>
+                      {board.title}
+                    </option>
+                  ))}
+                </select>
+              )}
+            />
           </div>
           <div className="mb-4">
             <Controller
@@ -79,4 +120,4 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
   );
 };
 
-export default CreateBoardModal;
+export default CreateTaskModal;

@@ -59,7 +59,6 @@ import { useForm, Controller } from "react-hook-form";
 const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
   const { control, handleSubmit, reset } = useForm();
 
-  // When the modal is opened or data changes, reset the form
   React.useEffect(() => {
     reset(data);
   }, [data, reset]);
@@ -77,6 +76,7 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
       }`}
     >
       <div className="bg-[#150F2D] p-4 rounded shadow-lg md:w-[450px] ">
+        <h2 className="text-white text-lg font-semibold mb-2">Edit Board</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label htmlFor="title" className="text-white mb-2">
@@ -85,7 +85,7 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
             <Controller
               name="title"
               control={control}
-              defaultValue={data.title}
+              defaultValue={data?.title}
               render={({ field }) => (
                 <input
                   type="text"
@@ -103,7 +103,7 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
             <Controller
               name="status"
               control={control}
-              defaultValue={data.status}
+              defaultValue={data?.status}
               render={({ field }) => (
                 <select
                   className="w-full bg-[#150F2D] p-2 border rounded text-white"

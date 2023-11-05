@@ -1,19 +1,45 @@
 "use client";
 
+import {
+  useDeleteBoardMutation,
+  useUpdateBoardMutation,
+} from "@/redux/slices/board/boardApi";
+import { message } from "antd";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-
+import { BsTrash3 } from "react-icons/bs";
 const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
   const { control, handleSubmit, reset } = useForm();
+
+  //!RTK Handler
+  const [deleteBoard] = useDeleteBoardMutation();
+  const [updateBoard] = useUpdateBoardMutation();
 
   React.useEffect(() => {
     reset(data);
   }, [data, reset]);
 
-  const onSubmit = (updatedData: any) => {
-    console.log(updatedData);
-    onSave(updatedData);
-    onClose();
+  const onSubmit = async (updatedData: any) => {
+    try {
+      const res = await updateBoard(updatedData).unwrap();
+
+      if (res?.data) {
+        message.success("Board Updated");
+        onSave(updatedData);
+        onClose();
+      }
+    } catch (error) {
+      message.error("Something wrong! Please try again.");
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      const res = await deleteBoard(data?._id).unwrap();
+      if (res?.success) {
+        message.success("Board Deleted");
+        onClose();
+      }
+    } catch (error) {}
   };
 
   return (
@@ -23,7 +49,14 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
       }`}
     >
       <div className="bg-[#150F2D] p-4 rounded shadow-lg md:w-[450px] ">
-        <h2 className="text-white text-lg font-semibold mb-2">Edit Board</h2>
+        <div className="flex items-center justify-between">
+          {" "}
+          <h2 className="text-white text-lg font-semibold mb-2">Edit Board</h2>
+          <button onClick={handleDelete} className="text-lg text-red-500">
+            {" "}
+            <BsTrash3 />
+          </button>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label htmlFor="boardName" className="text-white mb-2">
@@ -43,7 +76,7 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
             />
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label htmlFor="status" className="text-white mb-2">
               Status
             </label>
@@ -62,7 +95,7 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
                 </select>
               )}
             />
-          </div>
+          </div> */}
 
           <div className="flex justify-end">
             <button

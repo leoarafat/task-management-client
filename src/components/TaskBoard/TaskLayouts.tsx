@@ -27,7 +27,6 @@ const TaskManagementLayout = () => {
   // console.log(data);
 
   const handleListItemClick = (item: any) => {
-    console.log(item);
     setSelectedItem(item);
     setIsModalOpen(true);
   };
@@ -36,7 +35,7 @@ const TaskManagementLayout = () => {
     setSelectedTaskItem(item);
     setTaskIsModalOpen(true);
   };
-
+  //! board update handler
   const handleSaveChanges = (boardData: any) => {
     // Update the data in your state or data source
     console.log("Updated data from task layout page:", boardData);

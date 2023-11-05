@@ -21,67 +21,52 @@ export const userApi = baseApi.injectEndpoints({
 
       invalidatesTags: [tagTypes.board],
     }),
-
-    //!
-    userLogin: build.mutation({
-      query: (loginData) => ({
-        url: `/auth/login`,
-        method: "POST",
-        body: loginData,
-      }),
-      invalidatesTags: [tagTypes.user],
-    }),
-    //!
-    loadUser: build.query({
-      query: (id: string | string[] | undefined) => ({
-        url: `/user/${id}`,
-        method: "GET",
-        credentials: "include" as const,
-      }),
-      providesTags: [tagTypes.user],
-    }),
     //!
 
     boards: build.query({
-      query: (arg: Record<string, any>) => {
+      query: () => {
         return {
           url: `/board/my-boards`,
           method: "GET",
           headers: {
             Authorization: `${authToken}`,
           },
-          //   params: arg,
         };
       },
-      //   transformResponse: (response: any[], meta: any) => {
-      //     return {
-      //       response,
-      //       meta,
-      //     };
-      //   },
       providesTags: [tagTypes.board],
     }),
 
     //!
-    updateProfile: build.mutation({
-      query: ({ id, name }) => ({
-        url: `/user/update-my-profile/${id}`,
+    updateBoard: build.mutation({
+      query: (data) => ({
+        url: `/board/update-board/${data?._id}`,
         method: "PATCH",
-        body: { name },
+        body: data,
+        headers: {
+          Authorization: `${authToken}`,
+        },
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.board],
     }),
 
     //! delete student
-    deleteUser: build.mutation({
+    deleteBoard: build.mutation({
       query: (id) => ({
-        url: `/user/${id}`,
+        url: `/board/${id}`,
         method: "DELETE",
+        headers: {
+          Authorization: `${authToken}`,
+        },
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.board],
     }),
     //!
   }),
 });
 
-export const { useCreateBoardMutation, useBoardsQuery } = userApi;
+export const {
+  useCreateBoardMutation,
+  useBoardsQuery,
+  useUpdateBoardMutation,
+  useDeleteBoardMutation,
+} = userApi;

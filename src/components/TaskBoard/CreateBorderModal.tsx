@@ -29,7 +29,7 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
     try {
       const boardData = {
         boardName: data?.boardName,
-        status: data?.status,
+        // status: data?.status,
         user: userId,
       };
       const res = await createBoard(boardData).unwrap();
@@ -75,7 +75,7 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
               </p>
             )}
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <Controller
               name="status"
               control={control}
@@ -90,7 +90,7 @@ const CreateBoardModal = ({ isOpen, onClose, onSave }: any) => {
                 </select>
               )}
             />
-          </div>
+          </div> */}
           <div className="flex justify-end">
             <button
               className="bg-blue-500 text-white p-2 rounded mr-2"

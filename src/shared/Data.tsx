@@ -1,8 +1,7 @@
-export const boardList = [
-  { id: 1, boardName: "Board-1", status: "Todo" },
-  { id: 2, boardName: "Board-2", status: "Todo" },
-  { id: 3, boardName: "Board-3", status: "Done" },
-  { id: 4, boardName: "Board-4", status: "Doing" },
+export const StatusList = [
+  { id: 1, status: "Todo" },
+  { id: 2, status: "Doing" },
+  { id: 3, status: "Done" },
 ];
 export const taskData = [
   {

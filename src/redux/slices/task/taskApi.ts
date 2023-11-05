@@ -23,9 +23,21 @@ export const taskApi = baseApi.injectEndpoints({
     //!
 
     tasks: build.query({
-      query: () => {
+      query: (options) => {
+        const { searchTerm, status, page, limit } = options;
+        let query = "/task/my-tasks?";
+        if (searchTerm) {
+          query += `searchTerm=${searchTerm}&`;
+        }
+
+        if (status) {
+          query += `status=${status}&`;
+        }
+
+        query += `page=${page}&limit=${limit}`;
+
         return {
-          url: `/task/my-tasks`,
+          url: query,
           method: "GET",
           headers: {
             Authorization: `${authToken}`,

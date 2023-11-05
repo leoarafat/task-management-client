@@ -138,17 +138,14 @@ const Navbar = () => {
           </div>
           {user?.role ? (
             <div className="block-endnav w-max flex items-center gap-4">
-              <Link href={"/profile"}>
-                {" "}
-                <Image
-                  width={45}
-                  height={45}
-                  className="w-[45px] h-[45px] rounded-full cursor-pointer"
-                  src={data?.avatar ? data?.avatar?.url : defaultUserImage}
-                  alt=""
-                />
-              </Link>
-
+              {" "}
+              <Image
+                width={45}
+                height={45}
+                className="w-[45px] h-[45px] rounded-full cursor-pointer"
+                src={data?.avatar ? data?.avatar?.url : defaultUserImage}
+                alt=""
+              />
               <div className="flex items-center md:hidden max-h-10">
                 <label
                   role="button"

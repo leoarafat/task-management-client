@@ -1,6 +1,9 @@
 "use client";
 import { useBoardsQuery } from "@/redux/slices/board/boardApi";
+import { useCreateTaskMutation } from "@/redux/slices/task/taskApi";
+import { getUserInfo } from "@/services/auth.service";
 import { boardList } from "@/shared/Data";
+import { Spin, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -8,11 +11,27 @@ import { useForm, Controller } from "react-hook-form";
 const CreateTaskModal = ({ isOpen, onClose, onSave }: any) => {
   const { control, handleSubmit, formState, reset } = useForm();
   const { errors } = formState;
+  const { userId } = getUserInfo() as any;
   //! Query list
   const { data } = useBoardsQuery({});
-  const onSubmit = (data: any) => {
-    console.log(data);
-    // Process the form data, and call the onSave function
+  const [createTask, { isLoading, error }] = useCreateTaskMutation();
+
+  const onSubmit = async (data: any) => {
+    try {
+      const taskData = {
+        title: data?.title,
+        description: data?.description,
+        board: data?.board,
+        status: data?.status,
+        user: userId,
+      };
+      const res = await createTask(taskData).unwrap();
+      console.log(res);
+      if (res?.data) {
+        message.success("Task Created");
+      }
+    } catch (error) {}
+
     onSave(data);
     onClose();
   };
@@ -73,44 +92,59 @@ const CreateTaskModal = ({ isOpen, onClose, onSave }: any) => {
           </div>
           <div className="mb-4">
             <Controller
-              name="status"
+              name="board"
               control={control}
+              defaultValue=""
+              rules={{ required: "Board is required" }}
               render={({ field }) => (
                 <select
                   {...field}
                   className="w-full p-2 text-white bg-[#150F2D] border border-white rounded"
                 >
+                  <option value="select">Select Board</option>
                   {data?.data?.map((board: any, index: number) => (
-                    <option key={index} value={board.status}>
+                    <option key={index} value={board._id}>
                       {board?.boardName}
                     </option>
                   ))}
                 </select>
               )}
             />
+            {errors.board && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.board.message as React.ReactNode}
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <Controller
               name="status"
               control={control}
+              rules={{ required: "Task Board is required" }}
               render={({ field }) => (
                 <select
                   {...field}
                   className="w-full p-2 text-white bg-[#150F2D] border border-white rounded"
                 >
+                  <option value="select">Select Status</option>
                   <option value="Todo">To-Do</option>
                   <option value="Doing">In Progress</option>
                   <option value="Done">Done</option>
                 </select>
               )}
             />
+            {errors.status && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.status.message as React.ReactNode}
+              </p>
+            )}
           </div>
           <div className="flex justify-end">
             <button
               className="bg-blue-500 text-white p-2 rounded mr-2"
               type="submit"
             >
-              Save
+              {isLoading ? <Spin /> : "Save"}
             </button>
             <button className="text-gray-600 p-2 rounded" onClick={onClose}>
               Cancel

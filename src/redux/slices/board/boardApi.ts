@@ -7,7 +7,7 @@ import { getFromLocalStorage } from "@/utils/local-storage";
 const authToken = getFromLocalStorage(authKey);
 // console.log(authToken);
 
-export const userApi = baseApi.injectEndpoints({
+export const boardApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createBoard: build.mutation({
       query: (boardData) => ({
@@ -69,4 +69,4 @@ export const {
   useBoardsQuery,
   useUpdateBoardMutation,
   useDeleteBoardMutation,
-} = userApi;
+} = boardApi;

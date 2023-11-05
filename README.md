@@ -6,6 +6,12 @@ Task Management Website is a web application designed to help you manage your ta
 
 ![Download Project Analytics PDF](https://drive.google.com/file/d/1MjFqIpMIG0rLjxxeEDjouwvMJr4GlE-N/view?usp=sharing)
 
+## Technology:
+
+#### Backend: Node Js, Express Js, Typescript, Mongoose, MongoDB, JWT, ZOD, Bcrypt Js
+
+#### Front-end: Next Js, Typescript, React-Hook-Form, Tailwind CSS, Redux RTK Query, AntD(For Dashboard)
+
 ## Features
 
 - **User Authentication:** Users can register, log in, and log out securely.

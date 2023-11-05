@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
 import React from "react";
 
@@ -17,7 +18,7 @@ const HeroSection = () => {
           Task Manager Application
         </h2>
         <p className="text-xl text-white mb-8">
-          Your updated description goes here.
+          Let's start to discover the website.
         </p>
         <Link
           href="/board"

@@ -1,11 +1,10 @@
 "use client";
 import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
 import { useLoadUserQuery } from "@/redux/slices/user/userApi";
-import UserImage from "../../../public/asstes/user.png";
+
 const { Header: AntHeader } = Layout;
 
 const DashboardHeader = () => {
@@ -26,7 +25,7 @@ const DashboardHeader = () => {
       ),
     },
   ];
-  // const user = getUserInfo() as any;
+
   // console.log(user);
   const { role, userId } = getUserInfo() as any;
   const { data } = useLoadUserQuery(userId);
@@ -47,7 +46,7 @@ const DashboardHeader = () => {
             color: "#fff",
           }}
         >
-          {role}
+          {data?.data?.name}
         </p>
         <Dropdown menu={{ items }}>
           <a>

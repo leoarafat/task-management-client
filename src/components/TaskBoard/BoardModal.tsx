@@ -1,4 +1,5 @@
 "use client";
+import Swal from "sweetalert2";
 
 import {
   useDeleteBoardMutation,
@@ -33,13 +34,25 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
     }
   };
   const handleDelete = async () => {
-    try {
-      const res = await deleteBoard(data?._id).unwrap();
-      if (res?.success) {
-        message.success("Board Deleted");
-        onClose();
-      }
-    } catch (error) {}
+    // Show a confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to delete this board. This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await deleteBoard(data?._id).unwrap();
+        if (res?.success) {
+          message.success("Board Deleted");
+          onClose();
+        }
+      } catch (error) {}
+    }
   };
 
   return (

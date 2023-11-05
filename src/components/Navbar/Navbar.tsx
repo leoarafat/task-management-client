@@ -89,21 +89,6 @@ const Navbar = () => {
                     </span>
                   </li>
                 </Link>
-                <Link href={"/faq"}>
-                  {" "}
-                  <li className="max-w-max">
-                    <span className="block md:px-3 group">
-                      <div
-                        className="relative text-white
-                                                        before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-cyan-800 dark:before:bg-cyan-400 before:transition before:scale-x-0 group-hover:before:scale-x-100"
-                      >
-                        <span className="transition group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
-                          FAQ
-                        </span>
-                      </div>
-                    </span>
-                  </li>
-                </Link>
               </ul>
               {user?.role ? (
                 <div className="flex sm:hidden pt-4 w-full">

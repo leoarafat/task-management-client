@@ -1,8 +1,6 @@
 import LoginPage from "@/components/Authentication/LoginPage";
 import Navbar from "@/components/Navbar/Navbar";
-
 import Heading from "@/utils/Heading";
-import { Metadata } from "next";
 
 const Login = () => {
   return (

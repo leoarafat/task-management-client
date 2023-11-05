@@ -2,7 +2,7 @@
 import { useBoardsQuery } from "@/redux/slices/board/boardApi";
 import { useCreateTaskMutation } from "@/redux/slices/task/taskApi";
 import { getUserInfo } from "@/services/auth.service";
-import { boardList } from "@/shared/Data";
+
 import { Spin, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React from "react";

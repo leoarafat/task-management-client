@@ -1,12 +1,9 @@
 import SignUpPage from "@/components/Authentication/SignUpPage";
 import Navbar from "@/components/Navbar/Navbar";
-
 import Heading from "@/utils/Heading";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "HotelHaven | SignUp",
-};
+
+
 
 const Login = () => {
   return (

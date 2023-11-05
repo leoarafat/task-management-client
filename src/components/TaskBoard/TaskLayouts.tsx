@@ -79,7 +79,7 @@ const TaskManagementLayout = () => {
   };
   return (
     <>
-      <div className="flex  h-screen">
+      <div className="flex  h-screen ">
         {/* Left Sidebar: Board Lists */}
         <div className="w-1/5 p-4 bg-[#150F2D] ">
           <h2 className="text-lg font-semibold text-white mb-4">Board Lists</h2>
@@ -111,7 +111,7 @@ const TaskManagementLayout = () => {
         </div>
         {/* Main Content Area */}
 
-        <div>
+        <div className="w-3/5">
           <div className="mb-6 flex justify-center  items-center ">
             <input
               onChange={(e) => handleSearch(e.target.value)}
@@ -121,7 +121,7 @@ const TaskManagementLayout = () => {
             />
             <BsSearch size={20} className="text-gray-500" />
           </div>
-          <div className="w-3/5 p-4 flex justify-between">
+          <div className=" p-4 flex justify-between">
             {/* Todo Column */}
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-white mb-2">Todo</h3>
@@ -235,7 +235,7 @@ const TaskManagementLayout = () => {
                       <p>
                         {" "}
                         Board:{" "}
-                        <span className="text-orange-600 font-semibold">
+                        <span className="text-gray-600 font-semibold">
                           {task?.board?.boardName}
                         </span>
                       </p>

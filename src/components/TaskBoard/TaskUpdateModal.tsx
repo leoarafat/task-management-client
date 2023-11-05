@@ -21,7 +21,7 @@ const TaskItemModal = ({ isOpen, onClose, data, onSave }: any) => {
   const onSubmit = async (updatedData: any) => {
     try {
       const res = await updateTask(updatedData).unwrap();
-      console.log(res);
+
       if (res?.data) {
         message.success("Task Updated");
         onSave(updatedData);
@@ -76,6 +76,25 @@ const TaskItemModal = ({ isOpen, onClose, data, onSave }: any) => {
               name="title"
               control={control}
               defaultValue={data?.title}
+              render={({ field }) => (
+                <input
+                  type="text"
+                  className="w-full bg-[#150F2D] p-2 border rounded text-white"
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="assignedUser" className="text-white mb-2">
+              Assigned User
+            </label>
+            <Controller
+              name="assignedUsers"
+              control={control}
+              defaultValue={
+                data?.assignedUsers?.map((user: any) => user).join(", ") || ""
+              }
               render={({ field }) => (
                 <input
                   type="text"

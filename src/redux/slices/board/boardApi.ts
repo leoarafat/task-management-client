@@ -1,7 +1,6 @@
 import { authKey } from "@/constants/storageKey";
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-types";
-import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { getFromLocalStorage } from "@/utils/local-storage";
 
 const authToken = getFromLocalStorage(authKey);

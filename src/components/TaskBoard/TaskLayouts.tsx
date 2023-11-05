@@ -8,6 +8,7 @@ import { boardList, taskData } from "@/shared/Data";
 import TaskItemModal from "./TaskUpdateModal";
 import { getUserInfo } from "@/services/auth.service";
 import { useBoardsQuery } from "@/redux/slices/board/boardApi";
+import { useTasksQuery } from "@/redux/slices/task/taskApi";
 
 const TaskManagementLayout = () => {
   //! State List Start
@@ -24,6 +25,8 @@ const TaskManagementLayout = () => {
   const { userId } = getUserInfo() as any;
   //! Query list
   const { data } = useBoardsQuery({});
+  const { data: taskData } = useTasksQuery({});
+
   // console.log(data);
 
   const handleListItemClick = (item: any) => {
@@ -87,9 +90,9 @@ const TaskManagementLayout = () => {
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-white mb-2">Todo</h3>
           <ul>
-            {taskData
-              .filter((task) => task.status === "Todo")
-              .map((task, index) => (
+            {taskData?.data
+              .filter((task: any) => task.status === "Todo")
+              .map((task: any, index: any) => (
                 <div
                   onClick={() => handleTaskListItemClick(task)}
                   key={index}
@@ -120,9 +123,9 @@ const TaskManagementLayout = () => {
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-white mb-2">In Progress</h3>
           <ul>
-            {taskData
-              .filter((task) => task.status === "Doing")
-              .map((task, index) => (
+            {taskData?.data
+              .filter((task: any) => task.status === "Doing")
+              .map((task: any, index: any) => (
                 <div
                   key={index}
                   onClick={() => handleTaskListItemClick(task)}
@@ -153,9 +156,9 @@ const TaskManagementLayout = () => {
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-white mb-2">Done</h3>
           <ul>
-            {taskData
-              .filter((task) => task.status === "Done")
-              .map((task, index) => (
+            {taskData?.data
+              .filter((task: any) => task.status === "Done")
+              .map((task: any, index: any) => (
                 <div
                   key={index}
                   onClick={() => handleTaskListItemClick(task)}

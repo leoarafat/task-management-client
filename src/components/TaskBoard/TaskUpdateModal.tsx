@@ -1,5 +1,7 @@
 "use client";
 
+import { useUpdateTaskMutation } from "@/redux/slices/task/taskApi";
+import { Spin, message } from "antd";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 
@@ -10,10 +12,18 @@ const TaskItemModal = ({ isOpen, onClose, data, onSave }: any) => {
     reset(data);
   }, [data, reset]);
 
-  const onSubmit = (updatedData: any) => {
-    console.log(updatedData);
-    onSave(updatedData);
-    onClose();
+  const [updateTask, { isLoading }] = useUpdateTaskMutation();
+
+  const onSubmit = async (updatedData: any) => {
+    try {
+      const res = await updateTask(updatedData).unwrap();
+      console.log(res);
+      if (res?.data) {
+        message.success("Task Updated");
+        onSave(updatedData);
+        onClose();
+      }
+    } catch (error) {}
   };
 
   return (
@@ -83,7 +93,7 @@ const TaskItemModal = ({ isOpen, onClose, data, onSave }: any) => {
               type="submit"
               className="bg-blue-500 text-white p-2 rounded mr-2"
             >
-              Save
+              {isLoading ? <Spin /> : "Edit"}
             </button>
             <button
               type="button"

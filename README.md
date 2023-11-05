@@ -1,10 +1,9 @@
 # Task Management Website
 
-# Live URL: https://task-manager-liart-sigma.vercel.app/
+### Live URL: https://task-manager-liart-sigma.vercel.app/
 
 Task Management Website is a web application designed to help you manage your tasks and projects efficiently. It provides features for user authentication, authorization, board creation, and task creation. With this application, you can organize your work, assign tasks to team members, and track the progress of your projects.
 
-![Task Management Website Screenshot](<../client/public/asstes/Screenshot%20(387).png>)
 ![Download Project Analytics PDF](https://drive.google.com/file/d/1MjFqIpMIG0rLjxxeEDjouwvMJr4GlE-N/view?usp=sharing)
 
 ## Features
@@ -34,5 +33,5 @@ Follow these steps to get a copy of the project up and running on your local mac
    cd task-management-website
    ```
 
-   npm install
-   npm start
+2. npm install
+3. npm start

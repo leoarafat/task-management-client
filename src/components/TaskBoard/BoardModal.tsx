@@ -26,13 +26,13 @@ const BoardItemModal = ({ isOpen, onClose, data, onSave }: any) => {
         <h2 className="text-white text-lg font-semibold mb-2">Edit Board</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label htmlFor="title" className="text-white mb-2">
-              Title
+            <label htmlFor="boardName" className="text-white mb-2">
+              Board Name
             </label>
             <Controller
-              name="title"
+              name="boardName"
               control={control}
-              defaultValue={data?.title}
+              defaultValue={data?.boardName}
               render={({ field }) => (
                 <input
                   type="text"

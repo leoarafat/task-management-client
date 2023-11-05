@@ -1,4 +1,4 @@
-import TaskManagementLayout from "@/components/Layouts/TaskLayouts";
+import TaskManagementLayout from "@/components/TaskBoard/TaskLayouts";
 import React from "react";
 
 const BoardPage = () => {

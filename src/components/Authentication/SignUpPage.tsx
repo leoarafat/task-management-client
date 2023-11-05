@@ -28,6 +28,7 @@ function SignUpPage() {
       }
     }
   }, [error, isSuccess, router]);
+
   const onSubmit = async (data: any) => {
     const userData = {
       name: data.name,

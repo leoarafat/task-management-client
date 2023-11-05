@@ -4,58 +4,46 @@ import { useState } from "react";
 import BoardItemModal from "./BoardModal";
 import CreateBoardModal from "./CreateBorderModal";
 import CreateTaskModal from "./CreateTaskModal";
-import { boardList } from "@/shared/Data";
+import { boardList, taskData } from "@/shared/Data";
 import TaskItemModal from "./TaskUpdateModal";
-const taskData = [
-  {
-    id: 1,
-    title: "Task 1",
-    status: "Todo",
-    description:
-      "ALorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque maiores, quia soluta eum tenetur quaerat debitis minima architecto quae dolor, unde laborum molestiae. Voluptas vero illum aliquam molestias voluptate.",
-  },
-  {
-    id: 2,
-    title: "Task 2",
-    status: "Doing",
-    description:
-      "BLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque maiores, quia soluta eum tenetur quaerat debitis minima architecto quae dolor, unde laborum molestiae. Voluptas vero illum aliquam molestias voluptate.",
-  },
-  {
-    id: 3,
-    title: "Task 3",
-    status: "Done",
-    description:
-      "CLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque maiores, quia soluta eum tenetur quaerat debitis minima architecto quae dolor, unde laborum molestiae. Voluptas vero illum aliquam molestias voluptate.",
-  },
-  // Add more tasks with different statuses
-];
+import { getUserInfo } from "@/services/auth.service";
+import { useBoardsQuery } from "@/redux/slices/board/boardApi";
 
 const TaskManagementLayout = () => {
   //! State List Start
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTaskModalOpen, setTaskIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedTaskItem, setSelectedTaskItem] = useState(null);
   const [isCreateBoardModalOpen, setIsCreateBoardModalOpen] = useState(false);
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
 
   //! State List End
 
+  //!Get user
+  const { userId } = getUserInfo() as any;
+  //! Query list
+  const { data } = useBoardsQuery({});
+  // console.log(data);
+
   const handleListItemClick = (item: any) => {
+    console.log(item);
     setSelectedItem(item);
     setIsModalOpen(true);
   };
-  // const handleTaskItemClick = (item: any) => {
-  //   setSelectedItem(item);
-  //   setIsModalOpen(true);
-  // };
-
-  const handleSaveChanges = (updatedData: any) => {
-    // Update the data in your state or data source
-    console.log("Updated data:", updatedData);
+  //!handle task
+  const handleTaskListItemClick = (item: any) => {
+    setSelectedTaskItem(item);
+    setTaskIsModalOpen(true);
   };
-  const handleTaskSaveChanges = (updatedData: any) => {
+
+  const handleSaveChanges = (boardData: any) => {
     // Update the data in your state or data source
-    console.log("Updated data:", updatedData);
+    console.log("Updated data from task layout page:", boardData);
+  };
+  const handleTaskSaveChanges = (taskData: any) => {
+    // Update the data in your state or data source
+    console.log("Updated data:", taskData);
   };
   const handleCreateBoard = () => {
     setIsCreateBoardModalOpen(true);
@@ -69,13 +57,13 @@ const TaskManagementLayout = () => {
       <div className="w-1/5 p-4 bg-[#150F2D] ">
         <h2 className="text-lg font-semibold text-white mb-4">Board Lists</h2>
         <ul>
-          {boardList?.map((board, index) => (
+          {data?.data?.map((board: any, index: number) => (
             <li
               key={index}
               onClick={() => handleListItemClick(board)}
               className="text-white text-lg cursor-pointer transition duration-300 hover:text-blue-400"
             >
-              {board.title}
+              {board.boardName}
             </li>
           ))}
         </ul>
@@ -84,7 +72,14 @@ const TaskManagementLayout = () => {
           onClick={handleCreateBoard}
           className="w-full flex items-center justify-center p-2 mt-4 bg-blue-500 text-white font-medium rounded hover:bg-blue-600"
         >
-          <BsPlusCircle /> <span className="ml-1">New Board</span>
+          {userId ? (
+            <>
+              {" "}
+              <BsPlusCircle /> <span className="ml-1">New Board</span>
+            </>
+          ) : (
+            "Login to access"
+          )}
         </button>
       </div>
       {/* Main Content Area */}
@@ -97,7 +92,7 @@ const TaskManagementLayout = () => {
               .filter((task) => task.status === "Todo")
               .map((task, index) => (
                 <div
-                  onClick={() => handleListItemClick(task)}
+                  onClick={() => handleTaskListItemClick(task)}
                   key={index}
                   className="text-white bg-[#25213D] rounded-md p-4 mb-4 shadow-md w-[240px] m-1 "
                 >
@@ -131,7 +126,7 @@ const TaskManagementLayout = () => {
               .map((task, index) => (
                 <div
                   key={index}
-                  onClick={() => handleListItemClick(task)}
+                  onClick={() => handleTaskListItemClick(task)}
                   className="text-white bg-[#BAA479] rounded-md p-4 mb-4 shadow-md w-[240px] m-1 "
                 >
                   <p className="text-xl font-semibold mb-2">{task.title}</p>
@@ -164,7 +159,7 @@ const TaskManagementLayout = () => {
               .map((task, index) => (
                 <div
                   key={index}
-                  onClick={() => handleListItemClick(task)}
+                  onClick={() => handleTaskListItemClick(task)}
                   className={`text-white bg-green-500 rounded-md p-4 mb-4 shadow-md w-[240px] m-1`}
                 >
                   <p className="text-xl font-semibold mb-2">{task.title}</p>
@@ -213,9 +208,9 @@ const TaskManagementLayout = () => {
       />
       {/* Render the task update modal */}
       <TaskItemModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        data={selectedItem}
+        isOpen={isTaskModalOpen}
+        onClose={() => setTaskIsModalOpen(false)}
+        data={selectedTaskItem}
         onSave={handleTaskSaveChanges}
       />
       {/* Create Board Modal */}

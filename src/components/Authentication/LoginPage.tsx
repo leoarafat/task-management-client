@@ -20,7 +20,7 @@ function LoginPage() {
       if (data) {
         message.success("Login Successfully!");
         storeUserInfo({ accessToken: data?.data?.accessToken });
-        router.push("/profile");
+        router.push("/board");
       }
     }
 

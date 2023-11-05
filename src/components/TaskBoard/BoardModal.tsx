@@ -1,6 +1,5 @@
 "use client";
 import Swal from "sweetalert2";
-
 import {
   useDeleteBoardMutation,
   useUpdateBoardMutation,

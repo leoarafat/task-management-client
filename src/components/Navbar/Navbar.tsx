@@ -92,7 +92,7 @@ const Navbar = () => {
               </ul>
               {user?.role ? (
                 <div className="flex sm:hidden pt-4 w-full">
-                  <Link href={"/profile"}>
+                  <Link href={"/board"}>
                     {" "}
                     <button
                       type="button"
@@ -111,7 +111,7 @@ const Navbar = () => {
                     {" "}
                     <button
                       type="button"
-                      title="Start buying"
+                      title="Login"
                       className="flex justify-center items-center w-full py-3 px-6 text-center rounded-full transition bg-gray-900 dark:bg-gray-700 hover:bg-cyan-500 active:bg-cyan-600 focus:bg-cyan-800"
                     >
                       <span className="block text-white text-sm">Login</span>
@@ -122,36 +122,39 @@ const Navbar = () => {
             </div>
           </div>
           {user?.role ? (
-            <div className="block-endnav w-max flex items-center gap-4">
+            <Link href={"/board"}>
               {" "}
-              <Image
-                width={45}
-                height={45}
-                className="w-[45px] h-[45px] rounded-full cursor-pointer"
-                src={data?.avatar ? data?.avatar?.url : defaultUserImage}
-                alt=""
-              />
-              <div className="flex items-center md:hidden max-h-10">
-                <label
-                  role="button"
-                  htmlFor="toggleNav"
-                  aria-label="hamburger"
-                  id="hamburger"
-                  className="relative p-6 -mr-6"
-                >
-                  <div
-                    role="hidden"
-                    id="line"
-                    className="m-auto h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-200 transition duration-300"
-                  ></div>
-                  <div
-                    role="hidden"
-                    id="line2"
-                    className="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-200 transition duration-300"
-                  ></div>
-                </label>
+              <div className="block-endnav w-max flex items-center gap-4">
+                {" "}
+                <Image
+                  width={45}
+                  height={45}
+                  className="w-[45px] h-[45px] rounded-full cursor-pointer"
+                  src={data?.avatar ? data?.avatar?.url : defaultUserImage}
+                  alt=""
+                />
+                <div className="flex items-center md:hidden max-h-10">
+                  <label
+                    role="button"
+                    htmlFor="toggleNav"
+                    aria-label="hamburger"
+                    id="hamburger"
+                    className="relative p-6 -mr-6"
+                  >
+                    <div
+                      role="hidden"
+                      id="line"
+                      className="m-auto h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-200 transition duration-300"
+                    ></div>
+                    <div
+                      role="hidden"
+                      id="line2"
+                      className="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-200 transition duration-300"
+                    ></div>
+                  </label>
+                </div>
               </div>
-            </div>
+            </Link>
           ) : (
             <div className="block-endnav w-max flex items-center gap-4">
               <Link href={"/login"}>

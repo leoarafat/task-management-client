@@ -14,6 +14,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSave }: any) => {
   const { userId } = getUserInfo() as any;
   //! Query list
   const { data } = useBoardsQuery({});
+
   const [createTask, { isLoading, error }] = useCreateTaskMutation();
 
   const onSubmit = async (data: any) => {
@@ -24,9 +25,11 @@ const CreateTaskModal = ({ isOpen, onClose, onSave }: any) => {
         board: data?.board,
         status: data?.status,
         user: userId,
+        assignedUsers: data?.assignedUsers,
       };
+
       const res = await createTask(taskData).unwrap();
-      console.log(res);
+
       if (res?.data) {
         message.success("Task Created");
       }
@@ -139,6 +142,28 @@ const CreateTaskModal = ({ isOpen, onClose, onSave }: any) => {
               </p>
             )}
           </div>
+          <div className="mb-4">
+            <Controller
+              name="assignedUsers"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="text"
+                  placeholder="Assign User(s) by Email (comma-separated)"
+                  className={`w-full p-2 text-white bg-[#150F2D] border border-white rounded ${
+                    errors.assign ? "border-red-500" : ""
+                  }`}
+                />
+              )}
+            />
+            {errors.assignedUsers && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.assignedUsers.message as React.ReactNode}
+              </p>
+            )}
+          </div>
+
           <div className="flex justify-end">
             <button
               className="bg-blue-500 text-white p-2 rounded mr-2"

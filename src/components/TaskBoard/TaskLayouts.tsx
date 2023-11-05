@@ -10,6 +10,7 @@ import { getUserInfo } from "@/services/auth.service";
 import { useBoardsQuery } from "@/redux/slices/board/boardApi";
 import { useTasksQuery } from "@/redux/slices/task/taskApi";
 import { StatusList } from "@/shared/Data";
+import TaskCard from "./TaskCard";
 
 const TaskManagementLayout = () => {
   //! State List Start
@@ -77,6 +78,7 @@ const TaskManagementLayout = () => {
   const clearFilter = () => {
     setSelectedStatus("");
   };
+  // taskData?.data?.map((m) => console.log(m));
   return (
     <>
       <div className="flex  h-screen ">
@@ -129,35 +131,11 @@ const TaskManagementLayout = () => {
                 {taskData?.data
                   .filter((task: any) => task.status === "Todo")
                   .map((task: any, index: any) => (
-                    <div
-                      onClick={() => handleTaskListItemClick(task)}
+                    <TaskCard
                       key={index}
-                      className="text-white bg-[#25213D] rounded-md p-4 mb-4 shadow-md w-[240px] m-1 "
-                    >
-                      <p className="text-xl font-semibold mb-2">{task.title}</p>
-                      <p className="text-sm mb-2">{task.description}</p>
-                      <p className="text-xs">
-                        Status:{" "}
-                        <span
-                          className={`inline-block px-2 py-1 rounded-md ${
-                            task.status === "Todo"
-                              ? "bg-blue-500 text-white"
-                              : task.status === "Doing"
-                              ? "bg-yellow-500 text-black"
-                              : "bg-green-500 text-white"
-                          }`}
-                        >
-                          {task.status}
-                        </span>
-                      </p>
-                      <p>
-                        {" "}
-                        Board:{" "}
-                        <span className="text-purple-400 font-semibold">
-                          {task?.board?.boardName}
-                        </span>
-                      </p>
-                    </div>
+                      task={task}
+                      onClick={() => handleTaskListItemClick(task)}
+                    />
                   ))}
               </ul>
             </div>
@@ -171,35 +149,11 @@ const TaskManagementLayout = () => {
                 {taskData?.data
                   .filter((task: any) => task.status === "Doing")
                   .map((task: any, index: any) => (
-                    <div
+                    <TaskCard
                       key={index}
+                      task={task}
                       onClick={() => handleTaskListItemClick(task)}
-                      className="text-white bg-[#3E96CD] rounded-md p-4 mb-4 shadow-md w-[240px] m-1 "
-                    >
-                      <p className="text-xl font-semibold mb-2">{task.title}</p>
-                      <p className="text-sm mb-2">{task.description}</p>
-                      <p className="text-xs">
-                        Status:{" "}
-                        <span
-                          className={`inline-block px-2 py-1 rounded-md ${
-                            task.status === "Todo"
-                              ? "bg-blue-500 text-white"
-                              : task.status === "Doing"
-                              ? "bg-yellow-500 text-black"
-                              : "bg-green-500 text-white"
-                          }`}
-                        >
-                          {task.status}
-                        </span>
-                      </p>
-                      <p>
-                        {" "}
-                        Board:{" "}
-                        <span className="text-slate-600 font-semibold">
-                          {task?.board?.boardName}
-                        </span>
-                      </p>
-                    </div>
+                    />
                   ))}
               </ul>
             </div>
@@ -211,35 +165,11 @@ const TaskManagementLayout = () => {
                 {taskData?.data
                   .filter((task: any) => task.status === "Done")
                   .map((task: any, index: any) => (
-                    <div
+                    <TaskCard
                       key={index}
+                      task={task}
                       onClick={() => handleTaskListItemClick(task)}
-                      className={`text-white bg-green-500 rounded-md p-4 mb-4 shadow-md w-[240px] m-1`}
-                    >
-                      <p className="text-xl font-semibold mb-2">{task.title}</p>
-                      <p className="text-sm mb-2">{task.description}</p>
-                      <p className="text-xs">
-                        Status:{" "}
-                        <span
-                          className={`inline-block px-2 py-1 rounded-md ${
-                            task.status === "Done"
-                              ? "bg-blue-500 text-white"
-                              : task.status === "Doing"
-                              ? "bg-yellow-500 text-black"
-                              : "bg-green-500 text-white"
-                          }`}
-                        >
-                          {task.status}
-                        </span>
-                      </p>
-                      <p>
-                        {" "}
-                        Board:{" "}
-                        <span className="text-gray-600 font-semibold">
-                          {task?.board?.boardName}
-                        </span>
-                      </p>
-                    </div>
+                    />
                   ))}
               </ul>
             </div>

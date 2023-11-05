@@ -33,18 +33,11 @@ export const userApi = baseApi.injectEndpoints({
     }),
     //!
 
-    users: build.query({
+    getUsers: build.query({
       query: (arg: Record<string, any>) => {
         return {
           url: `/user`,
           method: "GET",
-          params: arg,
-        };
-      },
-      transformResponse: (response: any[], meta: any) => {
-        return {
-          users: response,
-          meta,
         };
       },
       providesTags: [tagTypes.user],
@@ -78,4 +71,5 @@ export const {
   useLoadUserQuery,
   useUpdateProfileMutation,
   useDeleteUserMutation,
+  useGetUsersQuery,
 } = userApi;
